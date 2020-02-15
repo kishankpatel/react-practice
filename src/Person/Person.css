@@ -1,0 +1,11 @@
+.person {
+  border: 1px solid #ddd;
+  max-width: 400px;
+  padding: 20px;
+  margin: 10px auto;
+  word-wrap: break-word;
+}
+
+.person:hover {
+  box-shadow: 0 0 10px #777;
+}
