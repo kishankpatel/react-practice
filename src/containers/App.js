@@ -1,15 +1,41 @@
 import React, { Component } from 'react';
 import './App.css';
-import Persons from '../components/Persons/Persons'
-import Cockpit from '../components/Cockpit/Cockpit'
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
+import AuthContext from '../context/auth-context';
 class App extends Component {
+  constructor (props) {
+    super(props);
+    console.log('[App.js] constructor: app.js')
+  }
   state = {
     persons: [
       { id: 1, name: "Kishan", age: 23 },
       { id: 2, name: "Jerry", age: 27 },
       { id: 3, name: "Stephanie", age: 28 }
     ],
-    showPersons: true
+    showPersons: false
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps: app.js')
+    console.log('state: ', state)
+    console.log('props: ', props)
+    return state;
+  }
+
+  componentDidMount () {
+    // You can do some HTTP request
+    console.log('[App.js] componentDidMount: app.js')
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate: app.js')
+    return true;
+  }
+
+  componentDidUpdate () {
+    console.log('[App.js] componentDidUpdate: app.js')
   }
 
   nameChangeHandler = (event, id) => {
@@ -29,6 +55,12 @@ class App extends Component {
     this.setState({
       showPersons: !this.state.showPersons
     })
+    // for Synchronously update
+    // this.setState((prevState, props) => {
+    //   return {
+    //     showPersons: !prevState.showPersons
+    //   }
+    // })
   }
 
   deletePerson = (personIndex) => {
@@ -39,6 +71,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] render: app.js')
     var persons = null;
     if (this.state.showPersons) {
       persons = (

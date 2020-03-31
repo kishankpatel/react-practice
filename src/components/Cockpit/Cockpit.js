@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react';
 
 const Cockpit = (props) => {
+  const toggleBtnRef = useRef(null);
+
+  //lifecycle hook for functional component -- runs after render cycle
+  useEffect(() => {
+    toggleBtnRef.current.click();
+    console.log("[Cockpit.js] useEffect")
+    setTimeout(() => {
+      console.log("Fetched data from cloud.")
+    }, 1000)
+  }, [])
+
   let classes = ''
   if (props.persons.length <= 1) {
     classes = 'red bold'
@@ -25,6 +36,7 @@ const Cockpit = (props) => {
       <button
         style={btnStyle}
         onClick={props.clicked}
+        ref={toggleBtnRef}
       >
         Toggle Show
       </button>
